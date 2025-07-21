@@ -130,7 +130,7 @@ export default function Home() {
                     <td className="border-x-2 border-green-900">{advocate.degree}</td>
                     <td className="border-x-2 border-green-900">
                       {advocate.specialties.map((s) => (
-                        <div key={s}>{s}</div>
+                        <div key={s}>- {s}</div>
                       ))}
                     </td>
                     <td className="border-x-2 border-green-900">{advocate.yearsOfExperience}</td>
