@@ -14,6 +14,7 @@ export default function Home() {
   const searchTerm = useRef<string>('');
 
   const fetchAdvocates = async (page = 1) => {
+    // TODO: upgrade to use react-query
     try {
       setIsLoading(true);
       const response = await fetch(`/api/advocates?limit=${PAGINATION_LIMIT}&page=${page}`);
@@ -34,9 +35,12 @@ export default function Home() {
 };
 
   useEffect(() => {
-    // TODO: upgrade to use react-query
     fetchAdvocates(1);
   }, []);
+
+  useEffect(() => {
+    fetchAdvocates(pageNumber);
+  }, [pageNumber]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     searchTerm.current = e.target.value;
@@ -71,13 +75,11 @@ export default function Home() {
       return;
     }
     setPageNumber(prevPage => prevPage - 1);
-    fetchAdvocates(pageNumber);
   };
 
   const handleNextPage = () => {
     // TODO: check page count and return early if on last page
     setPageNumber(prevPage => prevPage + 1);
-    fetchAdvocates(pageNumber);
   };
 
   return (
