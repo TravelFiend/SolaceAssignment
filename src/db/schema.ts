@@ -1,4 +1,4 @@
-import { sql } from "drizzle-orm";
+import { sql, type InferSelectModel, type InferInsertModel } from "drizzle-orm";
 import {
   pgTable,
   integer,
@@ -15,10 +15,17 @@ const advocates = pgTable("advocates", {
   lastName: text("last_name").notNull(),
   city: text("city").notNull(),
   degree: text("degree").notNull(),
-  specialties: jsonb("payload").default([]).notNull(),
+  specialties: jsonb("payload").default([]).notNull().$type<string[]>(),
   yearsOfExperience: integer("years_of_experience").notNull(),
   phoneNumber: bigint("phone_number", { mode: "number" }).notNull(),
   createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
 });
 
-export { advocates };
+type SelectAdvocate = InferSelectModel<typeof advocates>;
+type InsertAdvocate = InferInsertModel<typeof advocates>;
+
+export {
+  advocates,
+  type SelectAdvocate,
+  type InsertAdvocate
+};
