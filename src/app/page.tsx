@@ -85,7 +85,7 @@ export default function Home() {
       <h1 className="fixed top-0 py-4 flex w-full justify-center items-center bg-green-900 text-white text-2xl border-b-2 border-green-300">Solace Advocates</h1>
 
       {isLoading ? (
-        <p>Loading Advocates...</p>
+        <p className="pt-32 text-center min-h-screen bg-green-950 text-white">Loading Advocates...</p>
       ) : (
         <section className="mt-16 px-10 bg-green-950 text-white min-h-screen flex flex-col items-center">
           <div className="fixed px-10 flex justify-between items-end mb-8 w-full bg-green-950 pb-8 border-b-2 border-green-300">
