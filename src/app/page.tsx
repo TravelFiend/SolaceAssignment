@@ -83,37 +83,36 @@ export default function Home() {
   };
 
   return (
-    <main style={{ margin: "24px" }}>
-      {error && (
-        <h3>{error}</h3>
-      )}
+    <main className="relative">
+      <h1 className="fixed top-0 py-4 flex w-full justify-center items-center bg-green-900 text-white text-2xl border-b-2 border-green-300">Solace Advocates</h1>
 
       {isLoading ? (
-        <p>Loading Advocates...</p>
+        <p className="pt-32 text-center min-h-screen bg-green-950 text-white">Loading Advocates...</p>
       ) : (
-        <>
-          <h1 className="py-4 flex w-full justify-center items-center bg-slate-800 text-white">Solace Advocates</h1>
-
-          <div className="flex justify-between items-end">
+        <section className="mt-16 px-10 bg-green-950 text-white min-h-screen flex flex-col items-center">
+          <div className="fixed px-10 flex justify-between items-end mb-8 w-full bg-green-950 pb-8 border-b-2 border-green-300">
             <div>
-              <p>Search</p>
-              <p>
-                Searching for: <span id="search-term">{searchTerm.current}</span>
-              </p>
-              <input style={{ border: "1px solid black" }} onChange={onChange} value={searchTerm.current} />
+              <p className="text-xl py-4 text-gray-300">Search</p>
+              <div className="flex justify-between">
+                <p>
+                  Searching for: <span id="search-term">{searchTerm.current}</span>
+                </p>
+
+                {error && <p className="text-red-600">{error}</p>}
+              </div>
+              <input className="border border-black text-black px-2" onChange={onChange} value={searchTerm.current} />
               <button className="pl-3" onClick={onClick}>Reset Search</button>
             </div>
 
             <div>
-              <button className="ml-2 px-3 border border-black" onClick={handlePrevPage}>Prev</button>
-              <button className="ml-2 px-3 border border-black" onClick={handleNextPage}>Next</button>
+              <button className="ml-2 px-3 border border-black bg-green-300 text-green-950 rounded-md" onClick={handlePrevPage}>Prev</button>
+              <button className="ml-2 px-3 border border-black bg-green-300 text-green-950 rounded-md" onClick={handleNextPage}>Next</button>
             </div>
           </div>
-          <br />
-          <br />
-          <table>
-            <thead>
-              <tr>
+
+          <table className="w-full mt-44 md:w-4/5 border-4 border-green-300 rounded-lg mb-32">
+            <thead className="">
+              <tr className="border-b-4 border-green-300">
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>City</th>
@@ -126,24 +125,24 @@ export default function Home() {
             <tbody>
               {filteredAdvocates.map((advocate) => {
                 return (
-                  <tr key={advocate.id}>
-                    <td>{advocate.firstName}</td>
-                    <td>{advocate.lastName}</td>
-                    <td>{advocate.city}</td>
-                    <td>{advocate.degree}</td>
-                    <td>
+                  <tr key={advocate.id} className="border-b-2 border-green-300">
+                    <td className="border-x-2 border-green-900">{advocate.firstName}</td>
+                    <td className="border-x-2 border-green-900">{advocate.lastName}</td>
+                    <td className="border-x-2 border-green-900">{advocate.city}</td>
+                    <td className="border-x-2 border-green-900">{advocate.degree}</td>
+                    <td className="border-x-2 border-green-900">
                       {advocate.specialties.map((s) => (
-                        <div key={s}>{s}</div>
+                        <div key={s}>- {s}</div>
                       ))}
                     </td>
-                    <td>{advocate.yearsOfExperience}</td>
-                    <td>{advocate.phoneNumber}</td>
+                    <td className="border-x-2 border-green-900">{advocate.yearsOfExperience}</td>
+                    <td className="border-x-2 border-green-900">{advocate.phoneNumber}</td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
-        </>
+        </section>
       )}
     </main>
   );
